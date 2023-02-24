@@ -68,25 +68,31 @@ def main():
 
 #Juego uwu
 def pyngo():
-    #while True:
-        #lista diccionario
-        carton = []
+    while True:
+        #lista de cartones
+        list_carton = [
+            []
+        ]
         print("--BIENVENIDO A PYNGO--")
         print("   BINGO EN PYTHON")
-        print("1. -- Crear cartón.")
-        print("2. -- Mostar número")
-        print("3. -- Salir a menu")
+        print("1. -- Sacar bola")
+        print("2. -- Crear cartón.")
+        print("3. -- Mostar número")
+        print("4. -- Salir a menu")
         option = -1
-        while option not in ["1", "2", "3"]:
+        while option not in ["1", "2", "3", "4"]:
             option = input("Opcion: ")
-        if option == '1':
+        if option == "1":
+            bola = (random.choice(num))
+            print("El numero es... ", bola)
+        elif option == '2':
             print("-- Tamaño del carton --")
             height_carton = input("Ancho: ")
             length_carton = input("Largo: ")
-            temp_carton =
-        elif option == '2':
-            autores()
+            temp_carton = 1
         elif option == '3':
+            print("")
+        elif option == '4':
             break
 
 
