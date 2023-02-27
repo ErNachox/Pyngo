@@ -39,14 +39,8 @@ EXTRA PUNTUACIÓN (2 PUNTOS)
 """
 import random
 
-num = list(range(1, 99))
-"""
--- random num coger --
-newnum = (random.choice(num))
-            carton.append(newnum)
-            print(carton)
-            print(newnum)
-"""
+# lista de cartones
+carton = []
 #Funcion principal en bucle
 def main():
     while True:
@@ -58,7 +52,7 @@ def main():
         print("3. -- Salir del programa.")
         option = -1
         while option not in ["1", "2", "3"]:
-           option = input(print("Opcion: "))
+           option = input("Opcion: ")
         if option == '1':
             pyngo()
         elif option == '2':
@@ -68,11 +62,9 @@ def main():
 
 #Juego uwu
 def pyngo():
+    #Pool de bolas
+    pool_bolas = [*range(1, 99)]
     while True:
-        #lista de cartones
-        list_carton = [
-            []
-        ]
         print("--BIENVENIDO A PYNGO--")
         print("   BINGO EN PYTHON")
         print("1. -- Sacar bola")
@@ -83,13 +75,24 @@ def pyngo():
         while option not in ["1", "2", "3", "4"]:
             option = input("Opcion: ")
         if option == "1":
-            bola = (random.choice(num))
-            print("El numero es... ", bola)
+            print(pool_bolas)
+            if len(pool_bolas) != 0:
+                bola = random.choice(pool_bolas)
+                pool_bolas.remove(bola)
+                print("\nEl numero es... ", bola, "\n")
+            else:
+                print("No hay mas bolas")
+                break
         elif option == '2':
             print("-- Tamaño del carton --")
             height_carton = input("Ancho: ")
             length_carton = input("Largo: ")
-            temp_carton = 1
+            for i in range(int(length_carton)):
+                carton.append([])
+                for j in range(int(height_carton)):
+                    carton[i].append(random.randint(1,99))
+            print(carton)
+
         elif option == '3':
             print("")
         elif option == '4':
