@@ -39,14 +39,8 @@ EXTRA PUNTUACIÓN (2 PUNTOS)
 """
 import random
 
-num = list(range(1, 99))
-"""
--- random num coger --
-newnum = (random.choice(num))
-            carton.append(newnum)
-            print(carton)
-            print(newnum)
-"""
+# lista de cartones
+carton = []
 #Funcion principal en bucle
 def main():
     while True:
@@ -58,7 +52,7 @@ def main():
         print("3. -- Salir del programa.")
         option = -1
         while option not in ["1", "2", "3"]:
-           option = input(print("Opcion: "))
+           option = input("Opcion: ")
         if option == '1':
             pyngo()
         elif option == '2':
@@ -68,25 +62,44 @@ def main():
 
 #Juego uwu
 def pyngo():
-    #while True:
-        #lista diccionario
-        carton = []
+    #Pool de bolas
+    pool_bolas = [*range(1, 99)]
+    while True:
         print("--BIENVENIDO A PYNGO--")
         print("   BINGO EN PYTHON")
-        print("1. -- Crear cartón.")
-        print("2. -- Mostar número")
-        print("3. -- Salir a menu")
+        print("1. -- Sacar bola")
+        print("2. -- Crear cartón.")
+        print("3. -- Mostar número")
+        print("4. -- Salir a menu")
         option = -1
-        while option not in ["1", "2", "3"]:
+        while option not in ["1", "2", "3", "4"]:
             option = input("Opcion: ")
-        if option == '1':
+        if option == "1":
+            if len(pool_bolas) != 0:
+                bola = random.choice(pool_bolas)
+                pool_bolas.remove(bola)
+                print("\nEl numero es... ", bola, "\n")
+                for item in carton:
+                    if bola in item:
+                        item.remove(bola)
+                    else:
+                        pass
+            else:
+                print("No hay mas bolas")
+                break
+        elif option == '2':
             print("-- Tamaño del carton --")
             height_carton = input("Ancho: ")
             length_carton = input("Largo: ")
-            temp_carton =
-        elif option == '2':
-            autores()
+            for i in range(int(length_carton)):
+                carton.append([])
+                for j in range(int(height_carton)):
+                    carton[i].append(random.randint(1,99))
+            print(carton)
+
         elif option == '3':
+            print(carton)
+        elif option == '4':
             break
 
 
@@ -99,4 +112,3 @@ def autores():
 
 
 main()
-
