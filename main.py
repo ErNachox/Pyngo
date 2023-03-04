@@ -69,19 +69,22 @@ def pyngo():
         print("   BINGO EN PYTHON")
         print("1. -- Sacar bola")
         print("2. -- Crear cartón.")
-        print("3. -- Mostar número")
-        print("4. -- Salir a menu")
+        print("3. -- Mostrar cartón.")
+        print("4. -- Mostrar números.")
+        print("5. -- Salir a menu.")
         option = -1
-        while option not in ["1", "2", "3", "4"]:
+        while option not in ["1", "2", "3", "4", "5"]:
             option = input("Opcion: ")
         if option == "1":
             if len(pool_bolas) != 0:
                 bola = random.choice(pool_bolas)
+                removed_bolas.append(bola)
                 pool_bolas.remove(bola)
                 print("\nEl numero es... ", bola, "\n")
                 for item in carton:
                     if bola in item:
                         item.remove(bola)
+                        item.insert(index, "X")
                     else:
                         pass
             else:
