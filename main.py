@@ -41,6 +41,7 @@ import random
 
 # lista de cartones
 carton = []
+carton_placeholder = []
 #Funcion principal en bucle
 def main():
     while True:
@@ -83,19 +84,23 @@ def pyngo():
                 print("\nEl numero es... ", bola, "\n")
                 for item in carton:
                     if bola in item:
+                        index = item.index(bola)
                         item.remove(bola)
                         item.insert(index, "X")
-                    else:
-                        pass
+                if carton == carton_placeholder:
+                    print("\n\n\t¡¡PYNGO!!\n\n")
+                    break
             else:
                 print("No hay mas bolas")
                 break
+
         elif option == '2':
             print("-- Tamaño del carton --")
             height_carton = input("Ancho: ")
             length_carton = input("Largo: ")
             for i in range(int(length_carton)):
                 carton.append([])
+                carton_placeholder.append([])
                 for j in range(int(height_carton)):
                     carton[i].append(random.randint(1,99))
             print(carton)
