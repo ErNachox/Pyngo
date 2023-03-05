@@ -63,12 +63,14 @@ def main():
 
 #Juego uwu
 def pyngo():
+    p_bola = int(input("Define el rango de números: "))
     #Pool de bolas
-    pool_bolas = [*range(1, 99)]
+    pool_bolas = [*range(1, p_bola+1)]
+    removed_bolas = []
     while True:
         print("--BIENVENIDO A PYNGO--")
         print("   BINGO EN PYTHON")
-        print("1. -- Sacar bola")
+        print("1. -- Sacar bola.")
         print("2. -- Crear cartón.")
         print("3. -- Mostrar cartón.")
         print("4. -- Mostrar números.")
@@ -93,7 +95,6 @@ def pyngo():
             else:
                 print("No hay mas bolas")
                 break
-
         elif option == '2':
             print("-- Tamaño del carton --")
             height_carton = input("Ancho: ")
@@ -102,15 +103,18 @@ def pyngo():
                 carton.append([])
                 carton_placeholder.append([])
                 for j in range(int(height_carton)):
-                    carton[i].append(random.randint(1,99))
-            print(carton)
-
+                    carton[i].append(random.randint(1, p_bola))
+                    carton_placeholder[i].append("X")
+            for item in carton:
+                print(item)
         elif option == '3':
-            print(carton)
+            for item in carton:
+                print(item)
         elif option == '4':
+            print("-- Números ya aparecidos -- ")
+            print(*removed_bolas)
+        elif option == '5':
             break
-
-
 
 #Funcion enseñar autores del programa
 def autores():
