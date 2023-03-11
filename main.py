@@ -1,51 +1,7 @@
-"""
-TODO GUIDELINES
-
-Bingo con sistema de menús
-
-PROGRAMA BÁSICO (6 PUNTOS DE 10)
-Menú:
-    ·Crear cartón
-        Pedir numero de filas/columnas para tamaño cartón
-        Asignar numero 1-99 a cada casilla
-    ·Mostrar cartón
-        Mostrar estado cartón e indicar si algún numero ha salido
-        Anterior^ ha de ser mostrado en formato tabla legible
-    ·Mostrar número
-        Muestra lista con numeros que ya han salido. Formato legible usando \t
-    ·Sacar bola
-        Sacar bola al azar 1-99
-        Actualizar cartones
-        Informar cambios
-
-EXTRA CONFIGURACIÓN (1 PUNTO)
-    ·Rango numeros
-        Opción inicial antes de primer Menú para elegir rango números en lugar del 1-99.
-EXTRA MULTICARTÓN (2 PUNTOS)
-    Menú:
-        ·Varios cartones
-            Varios cartones jugando a la vez
-            Guardar lista con los cartones
-            Cada cartón debe ser un diccionario
-            Se ha de indicar en que cartón especificamente hay cambios
-EXTRA PUNTUACIÓN (2 PUNTOS)
-    Definir por casilla una puntuación aleatoria
-    En cada línea/bingo mostrar también la puntuación correspondiente a las casillas
-    En MOSTRAR CARTÓN se debe mostrar puntuación por casilla tambien
-    En MOSTRAR CARTÓN se debe mostrar puntuación total cartón tambien
-
-    IDEAS:
-        Que haga clear después de cada opción/cambio de menú
-"""
 import random
 
-# lista de cartones
-carton = []
-carton_placeholder = []
-#Funcion principal en bucle
 def main():
     while True:
-        carton = list()
         print("--BIENVENIDO-- ")
         print("Elija una opción")
         print("1. -- Jugar Pyngo.")
@@ -61,12 +17,13 @@ def main():
         elif option == '3':
             break
 
-#Juego uwu
 def pyngo():
     p_bola = int(input("Define el rango de números: "))
-    #Pool de bolas
+    carton_placeholder = []
+    carton = []
+    carton_puntos = []
     pool_bolas = [*range(1, p_bola+1)]
-    removed_bolas = []
+    removed_bolas = [[], []]
     while True:
         print("--BIENVENIDO A PYNGO--")
         print("   BINGO EN PYTHON")
@@ -81,17 +38,21 @@ def pyngo():
         if option == "1":
             if len(pool_bolas) != 0:
                 bola = random.choice(pool_bolas)
-                removed_bolas.append(bola)
+                removed_bolas[0].append(bola)
                 pool_bolas.remove(bola)
                 print("\nEl numero es... ", bola, "\n")
-                for item in carton:
-                    if bola in item:
-                        index = item.index(bola)
-                        item.remove(bola)
-                        item.insert(index, "X")
-                if carton == carton_placeholder:
-                    print("\n\n\t¡¡PYNGO!!\n\n")
-                    break
+                for item01 in carton_placeholder:
+                    for item in carton:
+                        if bola in item:
+                            index = item.index(bola)
+                            item.remove(bola)
+                            item.insert(index, "X")
+                    if item01.count('X') == len(item01):
+                        del carton_placeholder[carton_placeholder.index(item01)]
+                        if not carton_placeholder:
+                            print("¡BYNGO!")
+                        else:
+                            print("¡LINEA!")
             else:
                 print("No hay mas bolas")
                 break
@@ -101,26 +62,38 @@ def pyngo():
             length_carton = input("Largo: ")
             for i in range(int(length_carton)):
                 carton.append([])
-                carton_placeholder.append([])
+                carton_puntos.append([])
                 for j in range(int(height_carton)):
                     carton[i].append(random.randint(1, p_bola))
-                    carton_placeholder[i].append("X")
+                    carton_puntos[i].append(random.randint(1, 100))
+            carton_placeholder = carton.copy()
             for item in carton:
                 print(item)
+
         elif option == '3':
+            print("CARTÓN")
             for item in carton:
                 print(item)
+            print("CARTÓN DE PUNTOS")
+            for item in carton_puntos:
+                print(item)
+            print("PUNTUACIÓN TOTAL")
+            print(sum_points(carton_puntos))
         elif option == '4':
             print("-- Números ya aparecidos -- ")
             print(*removed_bolas)
         elif option == '5':
             break
 
-#Funcion enseñar autores del programa
 def autores():
     print("-- Autores del programa --\n")
     print("\t-JOEL CORNELLA RUIZ")
     print("\t-NICOLAS BONDIA PILGREN\n\n")
 
+def sum_points(carton_puntos):
+    points = []
+    for item in carton_puntos:
+        points.append(sum(item))
+    return sum(points)
 
 main()
