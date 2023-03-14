@@ -4,7 +4,8 @@
 
 Simple bingo basado en sistema de menús creado cómo practica para clase de programación de SMyR.
 
-Implementaciones:
+Complementos:
   ·Evitar repetición de números en creación de cartón.
   .Posibilidad de elegir el rango de numeros deseado.
-  .Puntuacion en cada valor del cartón.
+  .Puntuación en cada valor del cartón.
+ 
